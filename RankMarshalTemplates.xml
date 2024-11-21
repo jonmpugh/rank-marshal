@@ -1,0 +1,433 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<Frame name="RankMarshalTooltipTemplate" virtual="true" inherits="TooltipBackdropTemplate" hidden="true">
+		<Size>
+			<AbsDimension x="190" y="74" />
+		</Size>
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="BACKDROP_TUTORIAL_16_16" type="global" />
+		</KeyValues>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText1" inherits="GameFontNormal" text="haha" justifyV="CENTER" justifyH="CENTER">
+					<Size>
+						<AbsDimension x="175" y="22" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP" x="0" y="-10" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentText2" inherits="GameFontNormalSmall" text="haha" justifyV="CENTER" justifyH="CENTER" wordwrap="true">
+					<Size>
+						<AbsDimension x="175" y="22" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentText1" relativePoint="BOTTOM" x="0" y="-5" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="RankMarshalTickTemplate" virtual="true">
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Frame name="$parentTick" virtual="true" enableMouse="true">
+				<Size>
+					<AbsDimension x="32" y="32" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parentArt" file="Interface\MainMenuBar\UI-ExhaustionTickNormal">
+							<Anchors>
+								<Anchor point="CENTER" />
+							</Anchors>
+						</Texture>
+						<FontString name="$parentNumber" inherits="GameFontNormalSmall" text="69420" justifyV="CENTER" justifyH="CENTER">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parentArt" relativePoint="LEFT" x="12" y="1" />
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer level="HIGHLIGHT">
+						<Texture file="Interface\MainMenuBar\UI-ExhaustionTickHighlight" alphaMode="ADD">
+							<Anchors>
+								<Anchor point="CENTER" />
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLeave>
+						_G[self:GetParent():GetName() .. "Tooltip"]:Hide()
+					</OnLeave>
+				</Scripts>
+			</Frame>
+			<Frame name="$parentTooltip" inherits="RankMarshalTooltipTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="$parentTick" relativePoint="BOTTOM" x="0" y="0" />
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Frame>
+	<Frame name="RankMarshalRankPaneTemplate" virtual="true" inherits="BackdropTemplate">
+		<Size>
+			<AbsDimension x="316" y="80" />
+		</Size>
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="BACKDROP_SLIDER_8_8" type="global" />
+		</KeyValues>
+		<Frames>
+			<Frame name="$parentRank" virtual="true">
+				<Size>
+					<AbsDimension x="100" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER" x="10" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="Loading..." justifyH="LEFT" justifyV="TOP">
+							<Color r="1.0" g="0.82" b="0" />
+							<FontHeight val="14" />
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER" x="0" y="0" />
+							</Anchors>
+							<Shadow>
+								<Offset x="1" y="1" />
+								<Color r="0" g="0" b="0" />
+							</Shadow>
+						</FontString>
+						<Texture name="$parentIcon">
+							<Size x="16" y="16" />
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parentText"
+									relativePoint="LEFT" x="-5" y="0" />
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentRankTitleText" inherits="GameFontNormalSmall" text="Next Rank: ">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP" x="0" y="-10" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentRankSubText" inherits="GameFontNormalSmall" text="Loading...">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentRank" relativePoint="BOTTOM" x="-10" y="-2" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHKWarningText" inherits="GameFontNormalSmall" text="Earn 15 Honorable Kills this week to progress"
+					hidden="true">
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parentRank" relativePoint="CENTER" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<Texture name="$parentMissionComplete" hidden="true">
+					<Size>
+						<AbsDimension x="78" y="78" />
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER" x="0" y="-2" />
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad inherit="prepend">
+				local factionGroup, factionName = UnitFactionGroup("player");
+				if ( factionGroup == "Alliance" ) then
+				_G[self:GetName() .. "MissionComplete"]:SetTexture("Interface\\PvPRankBadges\\PvPRankAlliance")
+				else
+				_G[self:GetName() .. "MissionComplete"]:SetTexture("Interface\\PvPRankBadges\\PvPRankHorde")
+				end
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="RankMarshalColumnTemplate" inherits="HonorFrameTextButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="70" y="108" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontHighlightSmall" text="COLUMN TITLE" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentTodayValue" inherits="GameFontNormalSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentTitle" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentYesterdayValue" inherits="GameFontNormalSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentTodayValue" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentThisweekValue" inherits="GameFontNormalSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentYesterdayValue" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLastweekValue" inherits="GameFontNormalSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentThisweekValue" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLifetimeValue" inherits="GameFontNormalSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentLastweekValue" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="RankMarshalFullStatsTemplate" virtual="true" inherits="BackdropTemplate">
+		<Size>
+			<AbsDimension x="316" y="90" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTodayTitle" inherits="GameFontNormalSmall" text="HONOR_THIS_SESSION">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" x="2" y="-20" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentYesterdayTitle" inherits="GameFontNormalSmall" text="HONOR_YESTERDAY">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentTodayTitle" relativePoint="BOTTOMLEFT" x="0" y="-8" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentThisWeekTitle" inherits="GameFontNormalSmall" text="HONOR_THISWEEK">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentYesterdayTitle" relativePoint="BOTTOMLEFT" x="0" y="-8" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLastWeekTitle" inherits="GameFontNormalSmall" text="HONOR_LASTWEEK">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentThisWeekTitle" relativePoint="BOTTOMLEFT" x="0" y="-8" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLifetimeTitle" inherits="GameFontNormalSmall" text="HONOR_LIFETIME">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentLastWeekTitle" relativePoint="BOTTOMLEFT" x="0" y="-8" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentHK" inherits="RankMarshalColumnTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTodayTitle" relativePoint="TOPRIGHT" x="50" y="23" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						_G[self:GetName() .. "Title"]:SetText("HKs")
+						self.title = HONORABLE_KILLS;
+						self.tooltip = NEWBIE_TOOLTIP_HONORABLE_KILLS;
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="$parentDK" inherits="RankMarshalColumnTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentHK" relativePoint="RIGHT" x="0" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						_G[self:GetName() .. "Title"]:SetText("DKs")
+						self.title = DISHONORABLE_KILLS;
+						self.tooltip = NEWBIE_TOOLTIP_DISHONORABLE_KILLS;
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="$parentHonor" inherits="RankMarshalColumnTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentDK" relativePoint="RIGHT" x="0" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						_G[self:GetName() .. "Title"]:SetText(HONOR_CONTRIBUTION_POINTS)
+						self.title = HONOR_CONTRIBUTION_POINTS;
+						self.tooltip = NEWBIE_TOOLTIP_HONOR_CONTRIBUTION_POINTS;
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+	</Frame>
+	<Frame name="RankMarshalHelpOverviewTemplate" virtual="true">
+		<Size y="50" />
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpOverviewText" wordwrap="true" text="This page describes the elements in the honor window. For information about the Classic WoW ranking system, see the information in Ranker.">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="-10" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				RankMarshalHelpOverviewText:SetWidth(620)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="RankMarshalHelpProgressBarTemplate" virtual="true">
+		<Size y="700" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString inherits="GameFontHighlightLarge" text="Progress Bar" name="RankMarshalHelpProgressBarTitle">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpProgressbarText" wordwrap="true" text="The progress bar tracks the honor you've earned this week:">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="RankMarshalHelpProgressBarTitle" relativePoint="BOTTOMLEFT" x="0" y="-10" />
+					</Anchors>
+				</FontString>
+				<Texture file="Interface\Addons\RankMarshal\images\progress-bar" name="RankMarshalHelpProgressBarTexture">
+					<Size x="460" y="230" />
+					<Anchors>
+						<Anchor point="TOP" x="0" y="-50" />
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpProgressbarText2" wordwrap="true" text="As you earn honor, the progress bar will fill. When you reach a new milestone, you'll see that section of the bar turn blue and your projected rank will update. You ONLY earn rank progress by reaching a milestone - There is no partial progress or roll-over! If you don't gain enough honor to reach the next milestone for the week, that honor is wasted. This is indicated by the red section of the bar.">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="RankMarshalHelpProgressbarText" relativePoint="BOTTOM" x="0" y="-266" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpProgressbarText3" wordwrap="true" text="Hover over a milestone to see more information about it:">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="RankMarshalHelpProgressbarText2" relativePoint="BOTTOM" x="0" y="-20" />
+					</Anchors>
+				</FontString>
+				<Texture file="Interface\Addons\RankMarshal\images\milestone-hover" name="RankMarshalHelpMilestoneHoverTexture">
+					<Size x="460" y="230" />
+					<Anchors>
+						<Anchor point="BOTTOM" x="0" y="60" />
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				RankMarshalHelpProgressbarText:SetWidth(620)
+				RankMarshalHelpProgressbarText2:SetWidth(620)
+				RankMarshalHelpProgressbarText3:SetWidth(620)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="RankMarshalHelpRankPanesTemplate" virtual="true">
+		<Size y="480" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString inherits="GameFontHighlightLarge" text="Rank Panes" name="RankMarshalHelpRankPanesTitle">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpRankPanesText" wordwrap="true" text="The rank panes show your current and projected ranks:">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="RankMarshalHelpRankPanesTitle" relativePoint="BOTTOMLEFT" x="0" y="-10" />
+					</Anchors>
+				</FontString>
+				<Texture file="Interface\Addons\RankMarshal\images\rank-panes" name="RankMarshalHelpRankPanesTexture">
+					<Size x="460" y="230" />
+					<Anchors>
+						<Anchor point="TOP" x="0" y="-50" />
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpRankPanesText2" wordwrap="true" text="The &quot;Current Rank&quot; pane shows the rank you are currently. Your current rank will not change until after the weekly reset. The percent shown here is your partial progress towards the next rank.">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="RankMarshalHelpRankPanesText" relativePoint="BOTTOM" x="0" y="-266" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpRankPanesText3" wordwrap="true" text="The &quot;Next Rank&quot; pane shows the rank you will be after the weekly reset. This will update as you earn honor and reach new milestones.">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="RankMarshalHelpRankPanesText2" relativePoint="BOTTOM" x="0" y="-20" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpRankPanesText4" wordwrap="true" text="The &quot;Next Reset&quot; countdown shows the time left until the next weekly honor reset. Remember: Any partial progress is lost after the reset, so make sure to reach your goal before this countdown ends!">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="RankMarshalHelpRankPanesText3" relativePoint="BOTTOM" x="0" y="-20" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				RankMarshalHelpRankPanesText:SetWidth(620)
+				RankMarshalHelpRankPanesText2:SetWidth(620)
+				RankMarshalHelpRankPanesText3:SetWidth(620)
+				RankMarshalHelpRankPanesText4:SetWidth(620)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="RankMarshalHelpStatsPaneTemplate" virtual="true">
+		<Size y="400" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString inherits="GameFontHighlightLarge" text="Stats Pane" name="RankMarshalHelpStatsPaneTitle">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpStatsPaneText" wordwrap="true" text="The stats pane shows your Honorable Kills, Dishonorable Kills, and Honor points:">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="RankMarshalHelpStatsPaneTitle" relativePoint="BOTTOMLEFT" x="0" y="-10" />
+					</Anchors>
+				</FontString>
+				<Texture file="Interface\Addons\RankMarshal\images\stats-pane" name="RankMarshalHelpStatsPaneTexture">
+					<Size x="460" y="230" />
+					<Anchors>
+						<Anchor point="TOP" x="0" y="-50" />
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" justifyH="LEFT" name="RankMarshalHelpStatsPaneText2" wordwrap="true" text="All available PvP stats are shown here. Some fields are blank here because they are not currently available in WoW Classic.">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="RankMarshalHelpStatsPaneText" relativePoint="BOTTOM" x="0" y="-266" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				RankMarshalHelpStatsPaneText:SetWidth(620)
+				RankMarshalHelpStatsPaneText2:SetWidth(620)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

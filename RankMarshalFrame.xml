@@ -1,0 +1,412 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\Interface\FrameXML\UI.xsd">
+	<Include file="RankMarshalTemplates.xml" />
+	<Frame name="RankMarshalFrame" setAllPoints="true" enableMouse="true" parent="HonorFrame">
+		<HitRectInsets>
+			<AbsInset left="0" right="30" top="0" bottom="75" />
+		</HitRectInsets>
+		<Frames>
+			<Frame name="RankMarshalProgressBar" parent="RankMarshalFrame">
+				<Size x="315" y="30" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="24" y="-77" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture>
+							<Anchors>
+								<Anchor point="TOPLEFT" />
+								<Anchor point="BOTTOMRIGHT" />
+							</Anchors>
+							<Color a="1" r="0" g="0" b="0" />
+						</Texture>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame name="MyOverlay">
+						<Layers>
+							<Layer level="OVERLAY">
+								<Texture name="ProgressOverlay" file="Interface\PaperDollInfoFrame\UI-Character-Skills-BarBorderHighlight"
+									parent="RankMarshalProgressBar">
+									<Size x="315" y="35" />
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="RankMarshalProgressBar" relativePoint="LEFT" x="0" y="0" />
+									</Anchors>
+								</Texture>
+							</Layer>
+						</Layers>
+					</Frame>
+					<Frame name="Milestone1" inherits="RankMarshalTickTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativeTo="RankMarshalProgressBar"
+								relativePoint="RIGHT" />
+						</Anchors>
+					</Frame>
+					<Frame name="Milestone2" inherits="RankMarshalTickTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativeTo="RankMarshalProgressBar"
+								relativePoint="RIGHT" />
+						</Anchors>
+					</Frame>
+					<Frame name="Milestone3" inherits="RankMarshalTickTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativeTo="RankMarshalProgressBar"
+								relativePoint="RIGHT" />
+						</Anchors>
+					</Frame>
+					<Frame name="Milestone4" inherits="RankMarshalTickTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativeTo="RankMarshalProgressBar"
+								relativePoint="RIGHT" />
+						</Anchors>
+					</Frame>
+					<StatusBar name="RankMarshalProgressBarChunk1" inherits="TextStatusBar"
+						parent="RankMarshalProgressBar" drawLayer="BACKGROUND" minValue="0"
+						maxValue="1" defaultValue="1">
+						<Size x="50" y="15" />
+						<Anchors>
+							<Anchor point="LEFT" x="7" y="0" />
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-StatusBar" />
+						<BarColor r="0" g="0.45" b="0.9" />
+						<Scripts>
+							<OnLoad>
+							</OnLoad>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</StatusBar>
+					<StatusBar name="RankMarshalProgressBarChunk2" inherits="TextStatusBar"
+						parent="RankMarshalProgressBar" drawLayer="BACKGROUND" minValue="0"
+						maxValue="1" defaultValue="1">
+						<Size x="50" y="15" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="RankMarshalProgressBarChunk1"
+								relativePoint="RIGHT" />
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-StatusBar" />
+						<BarColor r="0" g="1" b="0" />
+						<Scripts>
+							<OnLoad>
+							</OnLoad>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</StatusBar>
+					<StatusBar name="RankMarshalProgressBarChunk3" inherits="TextStatusBar"
+						parent="RankMarshalProgressBar" drawLayer="BACKGROUND" minValue="0"
+						maxValue="1" defaultValue="1">
+						<Size x="50" y="15" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="RankMarshalProgressBarChunk2"
+								relativePoint="RIGHT" />
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-StatusBar" />
+						<BarColor r="1" g="0" b="1" />
+						<Scripts>
+							<OnLoad>
+							</OnLoad>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</StatusBar>
+					<StatusBar name="RankMarshalProgressBarChunk4" inherits="TextStatusBar"
+						parent="RankMarshalProgressBar" drawLayer="BACKGROUND" minValue="0"
+						maxValue="1" defaultValue="1">
+						<Size x="50" y="15" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="RankMarshalProgressBarChunk3"
+								relativePoint="RIGHT" />
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-StatusBar" />
+						<BarColor r="1" g="0" b="0" />
+						<Scripts>
+							<OnLoad>
+							</OnLoad>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</StatusBar>
+				</Frames>
+			</Frame>
+			<Frame name="CurrentRankPane" inherits="RankMarshalRankPaneTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="RankMarshalProgressBar" relativePoint="BOTTOM"
+						x="0" y="0" />
+				</Anchors>
+			</Frame>
+			<Frame name="NextRankPane" inherits="RankMarshalRankPaneTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="CurrentRankPane" relativePoint="BOTTOM" x="0"
+						y="0" />
+				</Anchors>
+			</Frame>
+			<Frame name="NextResetCountdown">
+				<Size>
+					<AbsDimension x="316" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="NextRankPane" relativePoint="BOTTOMLEFT" x="3" y="-5" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Next Reset: ">
+							<Anchors>
+								<Anchor point="LEFT" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentText" inherits="GameFontNormalSmall" text="Calculating...">
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTitle" relativePoint="RIGHT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>self.TimeSinceLastUpdate = 0 </OnLoad>
+					<OnUpdate function="RankMarshal_NextResetPaneOnUpdate" />
+				</Scripts>
+			</Frame>
+			<Frame name="FullStatsPane" inherits="RankMarshalFullStatsTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="NextResetCountdown" relativePoint="BOTTOM" x="0" y="-10" />
+				</Anchors>
+			</Frame>
+			<Button name="ExportButton" inherits="UIPanelButtonTemplate" text="Export">
+				<Size x="90" y="22"/>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="23" y="83" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RankMarshal_OpenExportDialog()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="HelpButton" inherits="UIPanelButtonTemplate" text="Help">
+				<Size x="90" y="22"/>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="-43" y="83" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Settings.OpenToCategory(Settings.RANK_MARSHAL_CATEGORY:GetID())
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SettingsButton">
+				<Size x="15" y="15" />
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="HelpButton" relativePoint="LEFT" x="0" y="0" />
+				</Anchors>
+				<NormalTexture file="Interface\GossipFrame\BinderGossipIcon" />
+				<PushedTexture file="Interface\GossipFrame\BinderGossipIcon" />
+				<HighlightTexture file="Interface\GossipFrame\BinderGossipIcon" alphaMode="ADD" />
+				<Scripts>
+					<OnClick>
+						Settings.OpenToCategory(Settings.RANK_MARSHAL_SETTINGS_CATEGORY:GetID())
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="RankMarshalDebugFrame" inherits="BackdropTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="400" y="180" />
+				</Size>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global" />
+				</KeyValues>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMRIGHT"
+						x="-35" y="-90" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentHonorText" inherits="GameFontNormal" text="Honor">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" x="20" y="-30" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentRankText" inherits="GameFontNormal" text="Rank">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentHonorText" relativePoint="BOTTOMLEFT" x="0" y="-25" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentPercentText" inherits="GameFontNormal" text="%">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentRankText" relativePoint="BOTTOMLEFT" x="0" y="-25" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentHKsText" inherits="GameFontNormal" text="HKs">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentPercentText" relativePoint="BOTTOMLEFT" x="0" y="-25" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<EditBox name="$parentHonorEditBox" inherits="InputBoxTemplate">
+						<Size>
+							<AbsDimension x="50" y="10" />
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentHonorText" relativePoint="RIGHT" x="10" y="0" />
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>
+								local val = self:GetText()
+								if tonumber(val) then
+								_G[self:GetParent():GetName() .. "HonorSlider"]:SetValue(val)
+								end
+							</OnTextChanged>
+							<OnEnterPressed>
+								local val = self:GetText()
+								if tonumber(val) then
+								_G[self:GetParent():GetName() .. "HonorSlider"]:SetValue(val)
+								end
+								self:ClearFocus()
+							</OnEnterPressed>
+							<OnLoad>
+								self:SetAutoFocus(false);
+							</OnLoad>
+						</Scripts>
+					</EditBox>
+					<Slider name="$parentHonorSlider" orientation="HORIZONTAL" enableMouse="true" virtual="true" drawLayer="ARTWORK" minValue="0"
+						maxValue="500001" defaultValue="100000" inherits="UISliderTemplate" valueStep="1">
+						<Size x="250" y="17" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentHonorEditBox" relativePoint="RIGHT" x="5" y="5" />
+						</Anchors>
+						<HitRectInsets left="0" right="0" top="-10" bottom="-10" />
+						<Scripts>
+							<OnValueChanged>
+								_G[self:GetParent():GetName() .. "HonorEditBox"]:SetText(value)
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<EditBox name="$parentRankEditBox" inherits="InputBoxTemplate">
+						<Size>
+							<AbsDimension x="50" y="10" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentHonorEditBox" relativePoint="BOTTOM" x="0" y="-25" />
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>
+								local val = self:GetText()
+								if tonumber(val) then
+								_G[self:GetParent():GetName() .. "RankSlider"]:SetValue(val)
+								end
+							</OnTextChanged>
+							<OnEnterPressed>
+								local val = self:GetText()
+								if tonumber(val) then
+								_G[self:GetParent():GetName() .. "RankSlider"]:SetValue(val)
+								end
+								self:ClearFocus()
+							</OnEnterPressed>
+							<OnLoad>
+								self:SetAutoFocus(false);
+							</OnLoad>
+						</Scripts>
+					</EditBox>
+					<Slider name="$parentRankSlider" orientation="HORIZONTAL" enableMouse="true" virtual="true" drawLayer="ARTWORK" minValue="-4"
+						maxValue="14" defaultValue="5" inherits="UISliderTemplate" valueStep="1">
+						<Size x="250" y="17" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentRankEditBox" relativePoint="RIGHT" x="5" y="5" />
+						</Anchors>
+						<HitRectInsets left="0" right="0" top="-10" bottom="-10" />
+						<Scripts>
+							<OnValueChanged>
+								_G[self:GetParent():GetName() .. "RankEditBox"]:SetText(floor(value))
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<EditBox name="$parentPercentEditBox" inherits="InputBoxTemplate">
+						<Size>
+							<AbsDimension x="50" y="50" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentRankEditBox" relativePoint="BOTTOM" x="0" y="-10" />
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>
+								local val = self:GetText()
+								if tonumber(val) then
+								_G[self:GetParent():GetName() .. "PercentSlider"]:SetValue(val)
+								end
+							</OnTextChanged>
+							<OnEnterPressed>
+								local val = self:GetText()
+								if tonumber(val) then
+								_G[self:GetParent():GetName() .. "PercentSlider"]:SetValue(val)
+								end
+								self:ClearFocus()
+							</OnEnterPressed>
+							<OnLoad>
+								self:SetAutoFocus(false);
+							</OnLoad>
+						</Scripts>
+					</EditBox>
+					<Slider name="$parentPercentSlider" orientation="HORIZONTAL" enableMouse="true" virtual="true" drawLayer="ARTWORK" minValue="0"
+						maxValue="99" defaultValue="20" inherits="UISliderTemplate" valueStep="1">
+						<Size x="250" y="17" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentPercentEditBox" relativePoint="RIGHT" x="5" y="5" />
+						</Anchors>
+						<HitRectInsets left="0" right="0" top="-10" bottom="-10" />
+						<Scripts>
+							<OnValueChanged>
+								_G[self:GetParent():GetName() .. "PercentEditBox"]:SetText(value)
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<EditBox name="$parentHKsEditBox" inherits="InputBoxTemplate" numeric="true">
+						<Size>
+							<AbsDimension x="50" y="50" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentPercentEditBox" relativePoint="BOTTOM" x="0" y="15" />
+						</Anchors>
+						<Scripts>
+							<OnEnterPressed>
+								self:ClearFocus()
+							</OnEnterPressed>
+							<OnLoad>
+								self:SetAutoFocus(false)
+								self:SetText(15)
+							</OnLoad>
+						</Scripts>
+					</EditBox>
+					<Button name="DebugUpdateButton" inherits="UIPanelButtonTemplate" text="Update">
+						<Size x="90" y="22"/>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="-20" y="20" />
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RankMarshal_DebugUpdate()
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				-- Configure loading/saving saved variables
+				self:RegisterEvent("ADDON_LOADED"); -- Fired when saved variables are loaded
+				self:RegisterEvent("PLAYER_LOGOUT"); -- Fired when about to log out
+				self:RegisterEvent("PLAYER_ENTERING_WORLD"); -- Fired after loading game
+				self:RegisterEvent("PLAYER_PVP_KILLS_CHANGED"); -- Fired on honor gain
+				self:RegisterEvent("PLAYER_PVP_RANK_CHANGED");
+			</OnLoad>
+			<OnShow function="RankMarshal_RankMarshalFrameOnShow" />
+			<OnEvent function="RankMarshal_RankMarshalFrameOnEvent" />
+		</Scripts>
+	</Frame>
+</Ui>
