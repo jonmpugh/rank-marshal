@@ -1,0 +1,11 @@
+## Interface: 11504
+## Version: 1.0.0
+## Title: Rank Marshal
+## Notes: Replaces the honor window with a user-friendly interface for tracking your rank progress.
+## Author: Dildore
+## Dependencies: Ranker
+## SavedVariables: RankMsgEnabled RankSoundEnabled RankSoundOption DebugEnabled
+
+RankMarshalLib.lua
+RankMarshalFrame.xml
+RankMarshal.lua
