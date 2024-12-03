@@ -18,7 +18,7 @@ local currentProgress = GetPVPRankProgress()
 local milestones = {}
 local persistent_next_rank = nil
 local persistent_hk_reached = false
-local update_exp = GetTime()
+local update_exp = 0
 
 local loading_complete = false
 local debugTextColor = CreateColor(0, .45, .9)
@@ -515,10 +515,14 @@ function RankMarshal_RankMarshalFrameOnEvent(self, event, arg1)
             UpdateProgressBar()
             UpdateStats()
             UpdateNextRank()
-            update_exp = GetTime() + 1
+            update_exp = GetTime() + .01
         end
     elseif event == "PLAYER_PVP_RANK_CHANGED" then
+        UpdateMilestones()
+        UpdateProgressBar()
         UpdateCurrentRank()
+        UpdateNextRank()
+        UpdateStats(true)
     end
 end
 

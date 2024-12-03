@@ -26,8 +26,7 @@
 					<Frame name="MyOverlay">
 						<Layers>
 							<Layer level="OVERLAY">
-								<Texture name="ProgressOverlay" file="Interface\PaperDollInfoFrame\UI-Character-Skills-BarBorderHighlight"
-									parent="RankMarshalProgressBar">
+								<Texture name="ProgressOverlay" file="Interface\PaperDollInfoFrame\UI-Character-Skills-BarBorderHighlight">
 									<Size x="315" y="35" />
 									<Anchors>
 										<Anchor point="LEFT" relativeTo="RankMarshalProgressBar" relativePoint="LEFT" x="0" y="0" />
