@@ -518,7 +518,11 @@ function RankMarshal_RankMarshalFrameOnEvent(self, event, arg1)
             update_exp = GetTime() + .01
         end
     elseif event == "PLAYER_PVP_RANK_CHANGED" then
+        UpdateMilestones()
+        UpdateProgressBar()
         UpdateCurrentRank()
+        UpdateNextRank()
+        UpdateStats(true)
     end
 end
 
