@@ -1,32 +1,31 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 	<Frame name="RankMarshalTooltipTemplate" virtual="true" inherits="TooltipBackdropTemplate" hidden="true">
-		<Size>
-			<AbsDimension x="190" y="74" />
-		</Size>
 		<KeyValues>
 			<KeyValue key="backdropInfo" value="BACKDROP_TUTORIAL_16_16" type="global" />
 		</KeyValues>
 		<Layers>
 			<Layer level="BACKGROUND">
 				<FontString name="$parentText1" inherits="GameFontNormal" text="haha" justifyV="CENTER" justifyH="CENTER">
-					<Size>
-						<AbsDimension x="175" y="22" />
-					</Size>
 					<Anchors>
-						<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP" x="0" y="-10" />
+						<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP" x="0" y="-15" />
 					</Anchors>
 				</FontString>
 				<FontString name="$parentText2" inherits="GameFontNormalSmall" text="haha" justifyV="CENTER" justifyH="CENTER" wordwrap="true">
-					<Size>
-						<AbsDimension x="175" y="22" />
-					</Size>
 					<Anchors>
-						<Anchor point="TOP" relativeTo="$parentText1" relativePoint="BOTTOM" x="0" y="-5" />
+						<Anchor point="TOP" relativeTo="$parentText1" relativePoint="BOTTOM" x="0" y="-10" />
 					</Anchors>
 				</FontString>
 			</Layer>
 		</Layers>
+		<Scripts>
+			<OnShow>
+				self:SetSize(
+					_G[self:GetName() .. "Text2"]:GetStringWidth() + 20,
+					_G[self:GetName() .. "Text1"]:GetStringHeight() + _G[self:GetName() .. "Text2"]:GetStringHeight() + 40
+				)
+			</OnShow>
+		</Scripts>
 	</Frame>
 	<Frame name="RankMarshalTickTemplate" virtual="true">
 		<Anchors>
