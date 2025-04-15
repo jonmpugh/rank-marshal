@@ -486,10 +486,22 @@ function RankMarshal_RankMarshalFrameOnEvent(self, event, arg1)
             if DebugEnabled == nil then
                 DebugEnabled = Settings.RANK_MARSHAL_DEBUGGING:GetDefaultValue()
             end
+            if ExportButtonEnabled == nil then
+                ExportButtonEnabled = Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED:GetDefaultValue()
+            end
+            if SettingsButtonEnabled == nil then
+                SettingsButtonEnabled = Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED:GetDefaultValue()
+            end
+            if HelpButtonEnabled == nil then
+                HelpButtonEnabled = Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED:GetDefaultValue()
+            end
             Settings.RANK_MARSHAL_RANK_MSG_ENABLED:SetValue(RankMsgEnabled)
             Settings.RANK_MARSHAL_RANK_SOUND_ENABLED:SetValue(RankSoundEnabled)
             Settings.RANK_MARSHAL_RANK_SOUND_OPTION:SetValue(RankSoundOption)
             Settings.RANK_MARSHAL_DEBUGGING:SetValue(DebugEnabled)
+            Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED:SetValue(ExportButtonEnabled)
+            Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED:SetValue(SettingsButtonEnabled)
+            Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED:SetValue(HelpButtonEnabled)
             loading_complete = true
         end
     elseif event == "PLAYER_LOGOUT" then
@@ -498,6 +510,9 @@ function RankMarshal_RankMarshalFrameOnEvent(self, event, arg1)
         RankSoundEnabled = Settings.RANK_MARSHAL_RANK_SOUND_ENABLED:GetValue()
         RankSoundOption = Settings.RANK_MARSHAL_RANK_SOUND_OPTION:GetValue()
         DebugEnabled = Settings.RANK_MARSHAL_DEBUGGING:GetValue()
+        ExportButtonEnabled = Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED:GetValue()
+        SettingsButtonEnabled = Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED:GetValue()
+        HelpButtonEnabled = Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED:GetValue()
     elseif event == "PLAYER_ENTERING_WORLD" then
         UpdateMilestones()
         UpdateProgressBar()
@@ -673,6 +688,56 @@ function RankMarshal_ConfigureSettings()
             defaultValue)
         Settings.RANK_MARSHAL_DEBUGGING:SetValueChangedCallback(DebugSettingChanged)
         Settings.CreateCheckbox(settingsCategory, Settings.RANK_MARSHAL_DEBUGGING, "Enables debugging, intended for developers only")
+    end
+
+    -- Add button visibility settings (moved to end)
+    do
+        -- Export button toggle
+        local name = "Show Export button"
+        local variable = "RankMarshal_exportbutton"
+        local variableKey = "exportbutton"
+        local variableTbl = RankMarshal_SavedVars
+        local defaultValue = true
+        Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED = Settings.RegisterAddOnSetting(settingsCategory, variable, variableKey, variableTbl, type(defaultValue), name,
+            defaultValue)
+        Settings.CreateCheckbox(settingsCategory, Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED, "Shows or hides the Export button")
+
+        -- Settings button toggle
+        local name = "Show Settings button"
+        local variable = "RankMarshal_settingsbutton"
+        local variableKey = "settingsbutton"
+        local variableTbl = RankMarshal_SavedVars
+        local defaultValue = true
+        Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED = Settings.RegisterAddOnSetting(settingsCategory, variable, variableKey, variableTbl, type(defaultValue), name,
+            defaultValue)
+        Settings.CreateCheckbox(settingsCategory, Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED, "Shows or hides the Settings button")
+
+        -- Help button toggle
+        local name = "Show Help button"
+        local variable = "RankMarshal_helpbutton"
+        local variableKey = "helpbutton"
+        local variableTbl = RankMarshal_SavedVars
+        local defaultValue = true
+        Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED = Settings.RegisterAddOnSetting(settingsCategory, variable, variableKey, variableTbl, type(defaultValue), name,
+            defaultValue)
+        Settings.CreateCheckbox(settingsCategory, Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED, "Shows or hides the Help button")
+
+        -- Button visibility change handlers
+        local function ButtonVisibilityChanged(setting, value)
+            if not loading_complete then return end
+
+            if setting == Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED then
+                ExportButton:SetShown(value)
+            elseif setting == Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED then
+                SettingsButton:SetShown(value)
+            elseif setting == Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED then
+                HelpButton:SetShown(value)
+            end
+        end
+
+        Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED:SetValueChangedCallback(ButtonVisibilityChanged)
+        Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED:SetValueChangedCallback(ButtonVisibilityChanged)
+        Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED:SetValueChangedCallback(ButtonVisibilityChanged)
     end
 
     Settings.RegisterAddOnCategory(category)
