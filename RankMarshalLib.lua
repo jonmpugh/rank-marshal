@@ -692,12 +692,13 @@ function RankMarshal_ConfigureSettings()
 
     -- Add button visibility settings (moved to end)
     do
+        local variableTbl = RankMarshal_SavedVars
+        local defaultValue = true
+
         -- Export button toggle
         local name = "Show Export button"
         local variable = "RankMarshal_exportbutton"
         local variableKey = "exportbutton"
-        local variableTbl = RankMarshal_SavedVars
-        local defaultValue = true
         Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED = Settings.RegisterAddOnSetting(settingsCategory, variable, variableKey, variableTbl, type(defaultValue), name,
             defaultValue)
         Settings.CreateCheckbox(settingsCategory, Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED, "Shows or hides the Export button")
@@ -706,8 +707,6 @@ function RankMarshal_ConfigureSettings()
         local name = "Show Settings button"
         local variable = "RankMarshal_settingsbutton"
         local variableKey = "settingsbutton"
-        local variableTbl = RankMarshal_SavedVars
-        local defaultValue = true
         Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED = Settings.RegisterAddOnSetting(settingsCategory, variable, variableKey, variableTbl, type(defaultValue), name,
             defaultValue)
         Settings.CreateCheckbox(settingsCategory, Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED, "Shows or hides the Settings button")
@@ -716,8 +715,6 @@ function RankMarshal_ConfigureSettings()
         local name = "Show Help button"
         local variable = "RankMarshal_helpbutton"
         local variableKey = "helpbutton"
-        local variableTbl = RankMarshal_SavedVars
-        local defaultValue = true
         Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED = Settings.RegisterAddOnSetting(settingsCategory, variable, variableKey, variableTbl, type(defaultValue), name,
             defaultValue)
         Settings.CreateCheckbox(settingsCategory, Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED, "Shows or hides the Help button")
