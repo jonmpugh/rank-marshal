@@ -520,6 +520,11 @@ function RankMarshal_RankMarshalFrameOnEvent(self, event, arg1)
         UpdateNextRank()
         UpdateStats(true)
 
+        -- Set visiblity of export/settings/help buttons
+        Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED:TriggerValueChanged(Settings.RANK_MARSHAL_EXPORT_BUTTON_ENABLED:GetValue())
+        Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED:TriggerValueChanged(Settings.RANK_MARSHAL_SETTINGS_BUTTON_ENABLED:GetValue())
+        Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED:TriggerValueChanged(Settings.RANK_MARSHAL_HELP_BUTTON_ENABLED:GetValue())
+
         if RankerObjective ~= nil and RankerObjective.SetValue ~= nil then
             HookRankerObjectiveSetValue()
         else
