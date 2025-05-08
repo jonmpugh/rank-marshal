@@ -90,9 +90,8 @@
 				</Anchors>
 				<Layers>
 					<Layer level="ARTWORK">
-						<FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="Loading..." justifyH="LEFT" justifyV="TOP">
+						<FontString name="$parentText" inherits="GameFontNormalLarge" text="Loading..." justifyH="LEFT" justifyV="TOP">
 							<Color r="1.0" g="0.82" b="0" />
-							<FontHeight val="14" />
 							<Anchors>
 								<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER" x="0" y="0" />
 							</Anchors>
