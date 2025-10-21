@@ -566,7 +566,7 @@ StaticPopupDialogs["RankMarshalExportDialog"] = {
     hideOnEscape = true,
     preferredIndex = 3, -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
     OnLoad = function(self)
-        self.editBox:SetAutoFocus(true);
+        self.EditBox:SetAutoFocus(true);
     end,
     hasEditBox = true
 }
@@ -578,9 +578,9 @@ function RankMarshal_OpenExportDialog()
     local _, honor = GetPVPThisWeekStats()
     local level    = UnitLevel("Player")
 
-    dialog.editBox:SetText("https://soffe.github.io/ClassicEraHonorCalculator/calculator/" ..
+    dialog.EditBox:SetText("https://soffe.github.io/ClassicEraHonorCalculator/calculator/" ..
         tostring(rank) .. "/" .. tostring(progress) .. "/" .. tostring(honor) .. "/" .. tostring(level) .. "")
-    dialog.editBox:HighlightText()
+    dialog.EditBox:HighlightText()
 end
 
 -- ╔════════════════════════╗

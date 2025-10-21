@@ -1,5 +1,5 @@
-## Interface: 11507
-## Version: 1.2.1
+## Interface: 11508
+## Version: 1.2.2
 ## Title: Rank Marshal
 ## Notes: Replaces the honor window with a user-friendly interface for tracking your rank progress.
 ## Author: Dildore
